@@ -14,10 +14,25 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <graphframe.path>C:\deep_learning\bdaj\graphframe_lib\graphframes-0.5.0-spark2.1-s_2.11.jar</graphframe.path>
-    <logging.sl4j.path>C:\deep_learning\bdaj\graphframe_lib\scala-logging-slf4j_2.11-2.1.2.jar</logging.sl4j.path>
-    <logging.api>C:\deep_learning\bdaj\graphframe_lib\scala-logging-api_2.11-2.1.2.jar</logging.api>
+    <!--<graphframe.path>C:\deep_learning\bdaj\graphframe_lib\graphframes-0.5.0-spark2.1-s_2.11.jar</graphframe.path>-->
+    <!--<logging.sl4j.path>C:\deep_learning\bdaj\graphframe_lib\scala-logging-slf4j_2.11-2.1.2.jar</logging.sl4j.path>-->
+    <!--<logging.api>C:\deep_learning\bdaj\graphframe_lib\scala-logging-api_2.11-2.1.2.jar</logging.api>-->
   </properties>
+
+  <repositories>
+    <repository>
+      <id>central</id>
+      <url>http://repo1.maven.org/maven2</url>
+    </repository>
+    <repository>
+      <id>bintray</id>
+      <url>http://jcenter.bintray.com</url>
+    </repository>
+    <repository>
+      <id>bintray-spark</id>
+      <url>https://dl.bintray.com/spark-packages/maven/</url>
+    </repository>
+  </repositories>
 
   <dependencies>
     <dependency>
@@ -28,51 +43,76 @@
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-core_2.11</artifactId>
-      <version>2.1.0</version>
+      <artifactId>spark-core_2.12</artifactId>
+      <version>2.4.0</version>
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-mllib_2.11</artifactId>
-      <version>2.1.0</version>
+      <artifactId>spark-mllib_2.12</artifactId>
+      <version>2.4.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-graphx_2.12</artifactId>
+      <version>2.4.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>2.12.8</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.25</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-sql_2.11</artifactId>
+      <version>2.4.0</version>
     </dependency>
 
     <dependency>
       <groupId>graphframes</groupId>
       <artifactId>graphframes</artifactId>
-      <version>0.5.0-spark2.1-s_2.11</version>
-      <scope>system</scope>
-      <systemPath>${graphframe.path}</systemPath>
+      <version>0.7.0-spark2.4-s_2.11</version>
     </dependency>
 
     <dependency>
-      <groupId>scala-logging-slf4j</groupId>
-      <artifactId>scala-logging-slf4j</artifactId>
-      <version>2.11-2.1.2.jar</version>
-      <scope>system</scope>
-      <systemPath>${logging.sl4j.path}</systemPath>
+      <groupId>com.typesafe.scala-logging</groupId>
+      <artifactId>scala-logging-slf4j_2.11</artifactId>
+      <version>2.1.2</version>
     </dependency>
 
     <dependency>
-      <groupId>scala-logging-api</groupId>
-      <artifactId>scala-logging-api</artifactId>
-      <version>2.11-2.1.2</version>
-      <scope>system</scope>
-      <systemPath>${logging.api}</systemPath>
+      <groupId>com.typesafe.scala-logging</groupId>
+      <artifactId>scala-logging-api_2.11</artifactId>
+      <version>2.1.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.thoughtworks.paranamer</groupId>
+      <artifactId>paranamer</artifactId>
+      <version>2.8</version>
     </dependency>
 
   </dependencies>
+
   <build>
     <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven.compiler.plugin</artifactId>
-          <version>3.1</version>
-          <configuration>
-            <source>1.8</source>
-            <target>1.8</target>
-          </configuration>
-        </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>

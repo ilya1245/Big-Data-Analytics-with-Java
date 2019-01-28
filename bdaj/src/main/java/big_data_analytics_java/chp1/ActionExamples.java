@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -16,6 +18,7 @@ public class ActionExamples {
 	private static String FILE_NAME = "univ_rankings.txt";
 	
 	public static void main(String[] args) {
+		LogManager.getLogger("org").setLevel(Level.OFF);
 		SparkConf conf = new SparkConf().setAppName(appName).setMaster(master);
 		JavaSparkContext sc = new JavaSparkContext(conf);
 		JavaRDD<String> rddX = sc.parallelize(
@@ -26,8 +29,7 @@ public class ActionExamples {
 		}
 		
 		//Aggregation
-		JavaRDD<String> rddX2 = sc.parallelize(
-                Arrays.asList("1","2", "3"));
+		JavaRDD<String> rddX2 = sc.parallelize(Arrays.asList("1","2", "3"));
 	    String sumResult = rddX2.reduce((String x, String y) -> {
 	        	return "" + (Integer.parseInt(x) + Integer.parseInt(y));
 	        });
