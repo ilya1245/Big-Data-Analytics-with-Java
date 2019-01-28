@@ -29,7 +29,7 @@ public class ActionExamples {
 		}
 		
 		//Aggregation
-		JavaRDD<String> rddX2 = sc.parallelize(Arrays.asList("1","2", "3"));
+		JavaRDD<String> rddX2 = sc.parallelize(Arrays.asList("1","2", "3", "4"));
 	    String sumResult = rddX2.reduce((String x, String y) -> {
 	        	return "" + (Integer.parseInt(x) + Integer.parseInt(y));
 	        });
@@ -39,7 +39,7 @@ public class ActionExamples {
 	    JavaRDD<String> rddX3 = sc.parallelize(
                 Arrays.asList("element-1","element-2", "element-3"));
 	    rddX3.foreach(f -> System.out.println(f));
-	  //  rddX3.coalesce(1).saveAsTextFile("file:///C:/harpreet/temp/output11");
+	    //rddX3.coalesce(1).saveAsTextFile("output1.txt");
 	    
 	}
 
