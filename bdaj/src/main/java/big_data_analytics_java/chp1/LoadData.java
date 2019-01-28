@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -13,9 +15,10 @@ public class LoadData {
 
 	private static String appName = "LOAD_DATA_APPNAME";
 	private static String master = "local";
-	private static String FILE_NAME = "univ_rankings.txt";
+	private static String FILE_NAME = "data/university-rankings/school_and_country_table.csv";
 	
 	public static void main(String[] args) {
+		LogManager.getLogger("org").setLevel(Level.OFF);
 		SparkConf conf = new SparkConf().setAppName(appName).setMaster(master);
 		JavaSparkContext sc = new JavaSparkContext(conf);
 		JavaRDD<String> rowRdd = sc.textFile(FILE_NAME);
@@ -26,13 +29,13 @@ public class LoadData {
 				System.out.println(object);
 				System.out.println("--------------------");
 			}
-		//JavaRDD<String> filteredRows = rowRdd.filter(s -> s.contains("Santa Barbara"));
-		//	System.out.println(filteredRows.count());
-//		JavaRDD<Integer> rowlengths = rowRdd.map(s -> s.length());
-//		List<Integer> rows = rowlengths.collect();
-//		for (Integer row : rows) {
-//			System.out.println(row);
-//		}
+		JavaRDD<String> filteredRows = rowRdd.filter(s -> s.contains("Santa Barbara"));
+			System.out.println(filteredRows.count());
+		JavaRDD<Integer> rowlengths = rowRdd.map(s -> s.length());
+		List<Integer> rows = rowlengths.collect();
+		for (Integer row : rows) {
+			System.out.println(row);
+		}
 
 
 	}

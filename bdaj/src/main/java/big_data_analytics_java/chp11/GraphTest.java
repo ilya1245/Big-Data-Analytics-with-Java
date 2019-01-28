@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -19,6 +21,7 @@ import org.graphframes.GraphFrame;
 public class GraphTest {
 	
 	public static void main(String[] args ) {
+		LogManager.getLogger("org").setLevel(Level.OFF);
 		SparkConf conf = new SparkConf().setAppName("test").setMaster("local");
 		JavaSparkContext sc = new JavaSparkContext(conf);
 		SQLContext sqlContext = new SQLContext(sc);
