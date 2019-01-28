@@ -15,7 +15,7 @@ public class FlatMapExample {
 
 	private static String appName = "LOAD_DATA_APPNAME";
 	private static String master = "local";
-	private static String FILE_NAME = "data/university-rankings/school_and_country_table.csv";
+	private static String FILE_NAME = "resources/data/university-rankings/school_and_country_table.csv";
 	
 	public static void main(String[] args) {
 		LogManager.getLogger("org").setLevel(Level.OFF);
