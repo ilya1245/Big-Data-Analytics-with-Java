@@ -17,6 +17,7 @@
     <!--<graphframe.path>C:\deep_learning\bdaj\graphframe_lib\graphframes-0.5.0-spark2.1-s_2.11.jar</graphframe.path>-->
     <!--<logging.sl4j.path>C:\deep_learning\bdaj\graphframe_lib\scala-logging-slf4j_2.11-2.1.2.jar</logging.sl4j.path>-->
     <!--<logging.api>C:\deep_learning\bdaj\graphframe_lib\scala-logging-api_2.11-2.1.2.jar</logging.api>-->
+    <scala.version>2.12.8</scala.version>
   </properties>
 
   <repositories>
@@ -61,7 +62,7 @@
     <dependency>
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-library</artifactId>
-      <version>2.12.8</version>
+      <version>${scala.version}</version>
     </dependency>
 
     <dependency>
@@ -72,7 +73,7 @@
 
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-sql_2.11</artifactId>
+      <artifactId>spark-sql_2.12</artifactId>
       <version>2.4.0</version>
     </dependency>
 
