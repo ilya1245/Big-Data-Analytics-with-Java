@@ -3,8 +3,11 @@ package big_data_analytics_java.chp5;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.ml.classification.LogisticRegression;
 import org.apache.spark.ml.classification.LogisticRegressionModel;
 import org.apache.spark.ml.linalg.VectorUDT;
@@ -23,15 +26,18 @@ import org.apache.spark.sql.types.StructField;
 import org.apache.spark.sql.types.StructType;
 
 public class LinearRegressionTest {
-	
+	private static String FILE_NAME = "resources/data/university-rankings/school_and_country_table.csv";
 	public static void main(String[] args) throws Exception {
+		LogManager.getLogger("org").setLevel(Level.OFF);
 	 SparkConf sc = new SparkConf().setMaster("local[*]");
 	 SparkSession spark = SparkSession
 	   .builder()
 	   .config(sc)
 	   .appName("LinearRegressionTest")
 	   .getOrCreate();
-	
+		//JavaSparkContext jsc = new JavaSparkContext(sc);
+
+		//JavaRDD<String> strRowRdd = jsc.textFile(FILE_NAME);
 	 Dataset<Row> fullData = spark.read().csv("data/kc_house_data.csv");
 	 		fullData.createOrReplaceTempView("houses");
 	 

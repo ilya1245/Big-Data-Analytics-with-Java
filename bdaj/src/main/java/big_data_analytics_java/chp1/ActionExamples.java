@@ -21,8 +21,7 @@ public class ActionExamples {
 		LogManager.getLogger("org").setLevel(Level.OFF);
 		SparkConf conf = new SparkConf().setAppName(appName).setMaster(master);
 		JavaSparkContext sc = new JavaSparkContext(conf);
-		JavaRDD<String> rddX = sc.parallelize(
-                Arrays.asList("big data","analytics", "using java"));
+		JavaRDD<String> rddX = sc.parallelize(Arrays.asList("big data","analytics", "using java"));
 		List<String> strs = rddX.collect();
 		for (String str : strs) {
 			System.out.println(str);
