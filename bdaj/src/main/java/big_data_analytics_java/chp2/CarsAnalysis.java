@@ -34,6 +34,23 @@ public class CarsAnalysis {
         SQLContext sqlContext = new org.apache.spark.sql.SQLContext(sc);
         Dataset<Row> carsBaseDF1 = sqlContext.read().json("resources/data/cars/cars.json");
         carsBaseDF1.show();
+
+        System.out.println("---------- select * from car ----------");
+        carsBaseDF.createOrReplaceTempView("cars");
+        Dataset<Row> netDF = spark.sql("select * from cars");
+        netDF.show ();
+        System.out.println("Total Rows in Data = " + netDF.count());
+
+        System.out.println("---------- where make_country 'Italy' ----------");
+        Dataset<Row> italyCarsDF = spark.sql("select * from cars where make_country = 'Italy'");
+        italyCarsDF.show(); //show the full content
+        //italyCarsDF.write().format("json").save("tmp/cars/italycars.json"); lack of rights
+
+        System.out.println("italyCarsDF count = " + italyCarsDF.toJavaRDD().count());
+
+        Dataset<Row> distinctCntryDF = spark.sql("select distinct make_country from cars");
+        distinctCntryDF.show();
+
     }
 
 }
