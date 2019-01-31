@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
@@ -21,6 +23,7 @@ public class Apriori {
 	private static final double MIN_CONFIDENCE = 0.8; // or 80%
 	
 	public static void main(String[] args) {
+		LogManager.getLogger("org").setLevel(Level.OFF);
 		SparkConf conf = new SparkConf().setAppName(appName).setMaster(master);
 		JavaSparkContext sc = new JavaSparkContext(conf);
 		JavaRDD<String> rddX = sc.textFile(FILE_NAME);
@@ -29,13 +32,28 @@ public class Apriori {
 		Broadcast<Integer> broadcastVar = sc.broadcast(transactionCount.intValue());
 
 		UniqueCombinations uc = new UniqueCombinations();
+
+		System.out.println("---------- combStrArr ----------");
 		JavaRDD<Map<String,String>> combStrArr = rddX.map(s -> uc.findCombinations(s));
+		combStrArr.foreach(f -> System.out.println(f));
+
+		System.out.println("---------- combStrKeySet ----------");
 		JavaRDD<Set<String>> combStrKeySet = combStrArr.map(m -> m.keySet());
+		combStrKeySet.foreach(f -> System.out.println(f));
+
+		System.out.println("---------- combStrFlatMap ----------");
 		JavaRDD<String> combStrFlatMap = combStrKeySet.flatMap((Set<String> f) -> f.iterator());
+		combStrFlatMap.foreach(f -> System.out.println(f));
+
+		System.out.println("---------- combCountIndv ----------");
 		JavaPairRDD<String, Integer> combCountIndv = combStrFlatMap.mapToPair(s -> new Tuple2(s, 1));
+		combCountIndv.foreach(f -> System.out.println(f));
+
+		System.out.println("---------- combCountTotal ----------");
 		JavaPairRDD<String, Integer> combCountTotal = combCountIndv.reduceByKey((Integer x, Integer y) -> x.intValue() + y.intValue());
-		
-		
+		combCountTotal.foreach(f -> System.out.println(f));
+
+		System.out.println("---------- combCountIndvColl ----------");
 		List<Tuple2<String,Integer>> combCountIndvColl = combCountTotal.collect();
 		for (Tuple2<String, Integer> tuple2 : combCountIndvColl) {
 			System.out.println(tuple2._1 + "," + tuple2._2);

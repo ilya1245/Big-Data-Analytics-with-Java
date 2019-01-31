@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import big_data_analytics_java.chp11.flight_analytics.RelationVO;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.apache.spark.SparkConf;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -14,8 +16,8 @@ import org.graphframes.GraphFrame;
 public class BreadthFirstSearchBD {
    
 	public static void main(String[] args) {
+		LogManager.getLogger("org").setLevel(Level.OFF);
 		SparkConf c = new SparkConf().setMaster("local");
-		
 		SparkSession session = SparkSession
 				.builder()
 				.config(c)
