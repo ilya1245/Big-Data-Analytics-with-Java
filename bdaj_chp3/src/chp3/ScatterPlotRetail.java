@@ -2,8 +2,8 @@ package chp3;
 
 public class ScatterPlotRetail {
 
-	private static final long serialVersionUID = lL;
-	XYDataset inputData;
+	private static final long serialVersionUID = 1L;
+	/*XYDataset inputData;
 	JFreeChart chart;
 	public static String APP_NAME = "SCATTER_PLOT_EXAl'VlPLE";
 	public static String APP MASTER = "local";
@@ -13,7 +13,7 @@ public class ScatterPlotRetail {
 	"C:/FAST/eclipse/workspaces/Spark/SparkCharts/src/resources/online_retail.csv");
 	chart = createChart(inputData);
 	ChartPanel cPanel = new ChartPanel(chart);
-	cPanel.setPreferredSize(new java.awt.Dimension(500,270»;
+	cPanel.setPreferredSize(new java.awt.Dimension(500,270ï¿½;
 	setContentPane(cPanel);
 	}
 	public static void main(String[] args) {
@@ -58,6 +58,6 @@ public class ScatterPlotRetail {
 			return chart;
 			}
 			}
-		
+		*/
 
 }

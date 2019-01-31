@@ -44,7 +44,7 @@ public class BoxChartExample extends ApplicationFrame {
         yAxis.setAutoRangeIncludesZero(false);
         final BoxAndWhiskerRenderer renderer = new BoxAndWhiskerRenderer();
         renderer.setFillBox(true);
-        renderer.setToolTipGenerator(new BoxAndWhiskerToolTipGenerator());
+        //renderer.setToolTipGenerator(new BoxAndWhiskerToolTipGenerator());
         renderer.setMeanVisible(false);
         final CategoryPlot plot = new CategoryPlot(dataset, xAxis, yAxis, renderer);
 

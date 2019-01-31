@@ -3,20 +3,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>big_data_analytics_java</groupId>
-    <artifactId>bdaj</artifactId>
+    <artifactId>bdaj_3</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>bdaj</name>
+    <name>bdaj_3</name>
     <url>http://maven.apache.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <!--<graphframe.path>C:\deep_learning\bdaj\graphframe_lib\graphframes-0.5.0-spark2.1-s_2.11.jar</graphframe.path>-->
-        <!--<logging.sl4j.path>C:\deep_learning\bdaj\graphframe_lib\scala-logging-slf4j_2.11-2.1.2.jar</logging.sl4j.path>-->
-        <!--<logging.api>C:\deep_learning\bdaj\graphframe_lib\scala-logging-api_2.11-2.1.2.jar</logging.api>-->
         <scala.version>2.12.8</scala.version>
     </properties>
 
@@ -110,6 +107,18 @@
             <groupId>com.thoughtworks.paranamer</groupId>
             <artifactId>paranamer</artifactId>
             <version>2.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jcommon</artifactId>
+            <version>1.0.24</version>
         </dependency>
 
     </dependencies>

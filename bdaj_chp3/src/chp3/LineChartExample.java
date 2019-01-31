@@ -47,7 +47,7 @@ public class LineChartExample extends ApplicationFrame {
   									.getOrCreate();
 		Dataset<Row> df = sqlContext.read().format("json").json("data/india_temp.json");
 			df.createOrReplaceTempView("india_temp");
-		Dataset<Row>  dfc = sqlContext.sql	````5E4454EQQQ									("select explode(data) from india_temp");
+		Dataset<Row>  dfc = sqlContext.sql("select explode(data) from india_temp");
 		List<Row> rows = dfc.collectAsList();
 			for (Row row : rows) {
 				List<String> dataList = row.getList(0);

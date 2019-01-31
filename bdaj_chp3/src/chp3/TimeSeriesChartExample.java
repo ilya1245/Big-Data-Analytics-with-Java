@@ -2,6 +2,9 @@ package chp3;
 
 import java.awt.Color;
 import java.util.List;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -9,6 +12,7 @@ import org.apache.spark.api.java.function.Function;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SQLContext;
+import org.apache.spark.sql.SparkSession;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -41,6 +45,15 @@ public class TimeSeriesChartExample extends ApplicationFrame {
 		setContentPane(chartPanel);
 	}
 
+	public static void main(final String[] args) {
+		LogManager.getLogger("org").setLevel(Level.OFF);
+		final String title = "Time Series Management";
+		final TimeSeriesChartExample demo = new TimeSeriesChartExample(title);
+		demo.pack();
+		RefineryUtilities.positionFrameRandomly(demo);
+		demo.setVisible(true);
+	}
+
 	// private XYDataset createDataset( )
 	// {
 	// final TimeSeries series = new TimeSeries( "Random Data" ); // Second
@@ -63,12 +76,12 @@ public class TimeSeriesChartExample extends ApplicationFrame {
 
 	private XYDataset createDataset() {
 		final TimeSeries series = new TimeSeries("Jan-Dec 2015");
-		SparkConf sconf = new SparkConf().setAppName(APP_NAME).setMaster(APP_MASTER);
-		JavaSparkContext se = new JavaSparkContext(sconf);
-		SQLContext sqlContext = new SQLContext(se);
-		Dataset<Row> df = sqlContext.read().format("json").json("data/india_temp.json");
+		SparkConf conf = new SparkConf().setAppName(APP_NAME).setMaster(APP_MASTER).set("spark.driver.allowMultipleContexts", "true");
+		SparkSession spark = SparkSession.builder().config(conf).getOrCreate();
+
+		Dataset<Row> df = spark.read().json("data/india_temp.json");
 		df.createOrReplaceTempView("india_temp");
-		Dataset<Row> dfc = sqlContext.sql("select explode(data) from india_temp");
+		Dataset<Row> dfc = spark.sql("select explode(data) from india_temp");
 		JavaRDD<Row> rdd = dfc.javaRDD();
 		JavaRDD<Row> filterRdd = rdd.filter(new Function<Row, Boolean>() {
 			@Override
@@ -94,14 +107,6 @@ public class TimeSeriesChartExample extends ApplicationFrame {
 	private JFreeChart createChart(final XYDataset dataset) {
 		return ChartFactory.createTimeSeriesChart("TimeSeries -Temperatures vs Months (2015) ", "Months (2015)",
 				"Avg. Temperature", dataset, false, false, false);
-	}
-
-	public static void main(final String[] args) {
-		final String title = "Time Series Management";
-		final TimeSeriesChartExample demo = new TimeSeriesChartExample(title);
-		demo.pack();
-		RefineryUtilities.positionFrameRandomly(demo);
-		demo.setVisible(true);
 	}
 
 }
