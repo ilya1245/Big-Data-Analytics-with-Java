@@ -1,6 +1,10 @@
 package big_data_analytics_java.chp4;
 
 
+import com.midway.utils.P;
+import com.midway.utils.Print;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
 // $example on$
@@ -16,22 +20,32 @@ import org.apache.spark.mllib.stat.Statistics;
 
 public class JavaCorrelationsExample {
   public static void main(String[] args) {
-
+    LogManager.getLogger("org").setLevel(Level.OFF);
     SparkConf conf = new SparkConf().setAppName("JavaCorrelationsExample").setMaster("local");
     JavaSparkContext jsc = new JavaSparkContext(conf);
+    Print print = new Print();
 
     // $example on$
     JavaDoubleRDD seriesX = jsc.parallelizeDoubles(
-      Arrays.asList(1.0, 2.0, 3.0, 3.0, 5.0));  // a series
+            Arrays.asList(1.0, 2.0, 3.0, 3.0, 5.0));  // a series
+    P.println("---------- seriesX ----------");
+    P.printlnn(seriesX);
 
     // must have the same number of partitions and cardinality as seriesX
     JavaDoubleRDD seriesY = jsc.parallelizeDoubles(
-      Arrays.asList(11.0, 22.0, 33.0, 33.0, 555.0));
+            Arrays.asList(11.0, 22.0, 33.0, 33.0, 555.0));
+    P.println("---------- seriesY ----------");
+    P.printlnn(seriesY);
 
     // compute the correlation using Pearson's method. Enter "spearman" for Spearman's method.
     // If a method is not specified, Pearson's method will be used by default.
-    Double correlation = Statistics.corr(seriesX.srdd(), seriesY.srdd(), "pearson");
-    System.out.println("Correlation is: " + correlation);
+    P.println("---------- Correlation method = pearson ----------");
+    Double correlationP = Statistics.corr(seriesX.srdd(), seriesY.srdd(), "pearson");
+    P.printlnn("Correlation is: " + correlationP);
+
+    P.println("---------- Correlation method = spearman ----------");
+    Double correlationS = Statistics.corr(seriesX.srdd(), seriesY.srdd(), "spearman");
+    P.printlnn("Correlation is: " + correlationS);
 
     // note that each Vector is a row and not a column
     JavaRDD<Vector> data = jsc.parallelize(

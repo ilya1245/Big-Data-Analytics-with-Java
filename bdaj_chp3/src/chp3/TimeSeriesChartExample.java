@@ -1,8 +1,10 @@
 package chp3;
 
 import java.awt.Color;
+import java.util.Arrays;
 import java.util.List;
 
+import com.midway.utils.P;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.spark.SparkConf;
@@ -79,8 +81,12 @@ public class TimeSeriesChartExample extends ApplicationFrame {
 		SparkConf conf = new SparkConf().setAppName(APP_NAME).setMaster(APP_MASTER).set("spark.driver.allowMultipleContexts", "true");
 		SparkSession spark = SparkSession.builder().config(conf).getOrCreate();
 
+		System.out.println("---------- df ----------");
 		Dataset<Row> df = spark.read().json("data/india_temp.json");
+		df.show();
+
 		df.createOrReplaceTempView("india_temp");
+		System.out.println("---------- dfc ----------");
 		Dataset<Row> dfc = spark.sql("select explode(data) from india_temp");
 		JavaRDD<Row> rdd = dfc.javaRDD();
 		JavaRDD<Row> filterRdd = rdd.filter(new Function<Row, Boolean>() {
@@ -93,6 +99,12 @@ public class TimeSeriesChartExample extends ApplicationFrame {
 				return false;
 			}
 		});
+		filterRdd.foreach(r -> P.println(r));
+
+		JavaRDD<String> rdd2 = dfc.toJavaRDD().filter(r -> "2015".equals(r.getList(0).get(0))).map(r -> r.toString());
+		rdd2.foreach(r -> P.println(r));
+		JavaRDD<String> flatRdd = rdd2.flatMap(x -> Arrays.asList(x.split(",")).iterator());
+		flatRdd.foreach(r -> P.println(r));
 
 		List<Row> filterList = filterRdd.collect();
 		for (Row row : filterList) {
