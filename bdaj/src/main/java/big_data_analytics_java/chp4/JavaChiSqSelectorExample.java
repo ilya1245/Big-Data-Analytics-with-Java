@@ -1,5 +1,7 @@
 package big_data_analytics_java.chp4;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.SparkSession;
 
@@ -21,6 +23,7 @@ import org.apache.spark.sql.types.StructType;
 
 public class JavaChiSqSelectorExample {
   public static void main(String[] args) {
+    LogManager.getLogger("org").setLevel(Level.OFF);
 	SparkConf c = new SparkConf().setMaster("local[*]");
     SparkSession spark = SparkSession
       .builder()
@@ -43,7 +46,7 @@ public class JavaChiSqSelectorExample {
     Dataset<Row> df = spark.createDataFrame(data, schema);
 
     ChiSqSelector selector = new ChiSqSelector()
-      .setNumTopFeatures(1)
+      .setNumTopFeatures(2)
       .setFeaturesCol("features")
       .setLabelCol("clicked")
       .setOutputCol("selectedFeatures");
