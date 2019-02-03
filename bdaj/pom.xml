@@ -93,6 +93,32 @@
             <version>0.13.2</version>
         </dependency>-->
 
+        <!--Deep Learning-->
+        <dependency>
+            <groupId>org.deeplearning4j</groupId>
+            <artifactId>deeplearning4j-core</artifactId>
+            <version>1.0.0-beta3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.nd4j</groupId>
+            <artifactId>nd4j-native-platform</artifactId>
+            <version>1.0.0-beta3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.beust</groupId>
+            <artifactId>jcommander</artifactId>
+            <version>1.72</version>
+        </dependency>
+        <dependency>
+            <groupId>org.deeplearning4j</groupId>
+            <artifactId>dl4j-spark_2.11</artifactId>
+            <version>1.0.0-beta3_spark_2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.nd4j</groupId>
+            <artifactId>nd4j-kryo_2.11</artifactId>
+            <version>1.0.0-beta3</version>
+        </dependency>
 
 
         <dependency>
