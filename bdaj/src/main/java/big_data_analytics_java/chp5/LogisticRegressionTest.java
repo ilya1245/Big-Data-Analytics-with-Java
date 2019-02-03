@@ -98,17 +98,17 @@ public class LogisticRegressionTest {
 
         int testDataLength = new Integer("" + rows.count());
         System.out.println("testDataLength" + testDataLength);
-//	 int wrongResultsCnt = 0;
-//	 for (Row r: rows.collectAsList()) {
-//		  if(r.getDouble(1) != r.getDouble(2)) wrongResultsCnt = wrongResultsCnt + 1;
-//	 }
-//	 System.out.println("wrongResultsCnt of wrong results --> " + wrongResultsCnt);
-//	 double percentOfWrong = (wrongResultsCnt * 100)/testDataLength;
-//	 System.out.println("Percent of wrong results --> " + percentOfWrong);
+	 int wrongResultsCnt = 0;
+	 for (Row r: rows.collectAsList()) {
+		  if(r.getDouble(1) != r.getDouble(2)) wrongResultsCnt = wrongResultsCnt + 1;
+	 }
+	 System.out.println("wrongResultsCnt of wrong results --> " + wrongResultsCnt);
+	 double percentOfWrong = (wrongResultsCnt * 100)/testDataLength;
+	 System.out.println("Percent of wrong results --> " + percentOfWrong);
 
-//	 System.out.println("lr.getMaxIter() -->" + lr.getMaxIter());
-//	 System.out.println("lr.getElasticNetParam() -->" + lr.getElasticNetParam());
-//	 System.out.println("lr.getRegParam() -->" + lr.getRegParam());
+	 System.out.println("lr.getMaxIter() -->" + lr.getMaxIter());
+	 System.out.println("lr.getElasticNetParam() -->" + lr.getElasticNetParam());
+	 System.out.println("lr.getRegParam() -->" + lr.getRegParam());
         spark.stop();
     }
 

@@ -53,7 +53,9 @@ public class LinearRegressionTest {
                     Vectors.dense(Double.parseDouble(s.getString(0).trim()),
                             Double.parseDouble(s.getString(1).trim()),
                             Double.parseDouble(s.getString(2).trim()),
-                            Double.parseDouble(s.getString(3).trim()))
+                            Double.parseDouble(s.getString(3).trim()),
+                            Double.parseDouble(s.getString(0).trim()) * Double.parseDouble(s.getString(1).trim()),
+                            Double.parseDouble(s.getString(2).trim()) * Double.parseDouble(s.getString(3).trim()))
             );
         });
 
