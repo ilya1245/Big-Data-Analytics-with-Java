@@ -2,6 +2,7 @@ package big_data_analytics_java.chp6;
 
 import java.util.List;
 
+import com.midway.utils.P;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.spark.SparkConf;
@@ -20,6 +21,7 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.types.StructType;
+//import com.github.fommil.netlib.BLAS;
 
 /*
  * 1. Sentimental analysis on movie review.s
@@ -28,6 +30,9 @@ public class SentimentalAnalysisBigData {
 
     public static void main(String[] args) {
         LogManager.getLogger("org").setLevel(Level.OFF);
+//        P.println("-------------------");
+//        System.out.println(BLAS.getInstance().getClass().getName());
+//        P.println("-------------------");
         SparkConf c = new SparkConf().setMaster("local[*]");
         SparkSession spark = SparkSession
                 .builder()
