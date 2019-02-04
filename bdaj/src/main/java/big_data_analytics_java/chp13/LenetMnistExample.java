@@ -1,5 +1,7 @@
 package big_data_analytics_java.chp13;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator;
 import org.deeplearning4j.eval.Evaluation;
 import org.deeplearning4j.nn.api.OptimizationAlgorithm;
@@ -32,6 +34,7 @@ public class LenetMnistExample {
     private static final Logger log = LoggerFactory.getLogger(LenetMnistExample.class);
 
     public static void main(String[] args) throws Exception {
+        LogManager.getLogger("org").setLevel(Level.OFF);
         int nChannels = 1; // Number of input channels
         int outputNum = 10; // The number of possible outcomes
         int batchSize = 64; // Test batch size

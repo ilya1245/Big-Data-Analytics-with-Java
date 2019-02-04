@@ -3,6 +3,8 @@ package com.bdaj;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -64,6 +66,7 @@ public class LenetMnistSparkSample {
     private int numEpochs = 15;
 
     public static void main(String[] args) throws Exception {
+        LogManager.getLogger("org").setLevel(Level.OFF);
         new LenetMnistSparkSample().entryPoint(args);
     }
 

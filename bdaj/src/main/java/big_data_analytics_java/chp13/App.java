@@ -1,6 +1,8 @@
 package big_data_analytics_java.chp13;
 
 
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.deeplearning4j.datasets.iterator.impl.CifarDataSetIterator;
 import org.deeplearning4j.eval.Evaluation;
 import org.deeplearning4j.nn.api.OptimizationAlgorithm;
@@ -17,59 +19,58 @@ import org.deeplearning4j.nn.weights.WeightInit;
 import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
 
-public class App
-{
-    public static void main( String[] args )
-    {
+public class App {
+    public static void main(String[] args) {
+        LogManager.getLogger("org").setLevel(Level.OFF);
         //load the dataset
         CifarDataSetIterator dataSetIterator =
                 new CifarDataSetIterator(2, 5000, true);
-          //  System.out.println(dataSetIterator.getLabels());
+        //  System.out.println(dataSetIterator.getLabels());
 
         //create the CNN
-        ConvolutionLayer layer0 = new ConvolutionLayer.Builder(5,5)
+        ConvolutionLayer layer0 = new ConvolutionLayer.Builder(5, 5)
                 .nIn(3)
                 .nOut(16)
-                .stride(1,1)
-                .padding(2,2)
+                .stride(1, 1)
+                .padding(2, 2)
                 .weightInit(WeightInit.XAVIER)
                 .name("First convolution layer")
                 .activation(Activation.RELU)
                 .build();
 
         SubsamplingLayer layer1 = new SubsamplingLayer.Builder(SubsamplingLayer.PoolingType.MAX)
-                .kernelSize(2,2)
-                .stride(2,2)
+                .kernelSize(2, 2)
+                .stride(2, 2)
                 .name("First subsampling layer")
                 .build();
 
-        ConvolutionLayer layer2 = new ConvolutionLayer.Builder(5,5)
+        ConvolutionLayer layer2 = new ConvolutionLayer.Builder(5, 5)
                 .nOut(20)
-                .stride(1,1)
-                .padding(2,2)
+                .stride(1, 1)
+                .padding(2, 2)
                 .weightInit(WeightInit.XAVIER)
                 .name("Second convolution layer")
                 .activation(Activation.RELU)
                 .build();
 
         SubsamplingLayer layer3 = new SubsamplingLayer.Builder(SubsamplingLayer.PoolingType.MAX)
-                .kernelSize(2,2)
-                .stride(2,2)
+                .kernelSize(2, 2)
+                .stride(2, 2)
                 .name("Second subsampling layer")
                 .build();
 
-        ConvolutionLayer layer4 = new ConvolutionLayer.Builder(5,5)
+        ConvolutionLayer layer4 = new ConvolutionLayer.Builder(5, 5)
                 .nOut(20)
-                .stride(1,1)
-                .padding(2,2)
+                .stride(1, 1)
+                .padding(2, 2)
                 .weightInit(WeightInit.XAVIER)
                 .name("Third convolution layer")
                 .activation(Activation.RELU)
                 .build();
 
         SubsamplingLayer layer5 = new SubsamplingLayer.Builder(SubsamplingLayer.PoolingType.MAX)
-                .kernelSize(2,2)
-                .stride(2,2)
+                .kernelSize(2, 2)
+                .stride(2, 2)
                 .name("Third subsampling layer")
                 .build();
 
@@ -100,7 +101,7 @@ public class App
                 .layer(6, layer6)
                 .pretrain(false)
                 .backprop(true)
-                .setInputType(InputType.convolutional(32,32,3))
+                .setInputType(InputType.convolutional(32, 32, 3))
                 .build();
 
         //create the neural network object

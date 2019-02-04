@@ -3,6 +3,8 @@ package big_data_analytics_java.chp13;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -63,7 +65,8 @@ public class LenetMnistSparkSample {
     @Parameter(names = "-numEpochs", description = "Number of epochs for training")
     private int numEpochs = 15;
 
-    /*public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
+        LogManager.getLogger("org").setLevel(Level.OFF);
         new LenetMnistSparkSample().entryPoint(args);
     }
 
@@ -89,8 +92,8 @@ public class LenetMnistSparkSample {
             testDataList.add(iterTest.next());
         }
 
-        JavaRDD<DataSet> trainData = sc.parallelize(trainDataList);
-        JavaRDD<DataSet> testData = sc.parallelize(testDataList);
+        JavaRDD<DataSet> trainData = (JavaRDD<DataSet>)sc.parallelize(trainDataList);
+        JavaRDD<DataSet> testData = (JavaRDD<DataSet>)sc.parallelize(testDataList);
 
 
         //----------------------------------
@@ -143,14 +146,16 @@ public class LenetMnistSparkSample {
 
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
                 .seed(seed)
-                .iterations(iterations) // Training iterations as above
-                .regularization(true).l2(0.0005)
-                .learningRate(.01)//.biasLearningRate(0.02)
-                .learningRateDecayPolicy(LearningRatePolicy.Schedule)
-                .learningRateSchedule(lrSchedule)
+                //.iterations(iterations) // Training iterations as above
+                //.regularization(true)
+                .l2(0.0005)
+                //.learningRate(.01)//.biasLearningRate(0.02)
+                //.learningRateDecayPolicy(LearningRatePolicy.Schedule)
+                //.learningRateSchedule(lrSchedule)
                 .weightInit(WeightInit.XAVIER)
                 .optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
-                .updater(Updater.NESTEROVS).momentum(0.9)
+                .updater(Updater.NESTEROVS)
+                //.momentum(0.9)
                 .list()
                 .layer(0, new ConvolutionLayer.Builder(5, 5)
                         //nIn and nOut specify depth. nIn here is the nChannels and nOut is the number of filters to be applied
@@ -182,6 +187,6 @@ public class LenetMnistSparkSample {
                 .setInputType(InputType.convolutionalFlat(28,28,1)) //See note below
                 .backprop(true).pretrain(false).build();
         return conf;
-    }*/
+    }
 }
 
