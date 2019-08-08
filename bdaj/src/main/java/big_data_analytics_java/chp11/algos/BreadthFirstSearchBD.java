@@ -57,7 +57,7 @@ public class BreadthFirstSearchBD {
 		
 		
 		
-		GraphFrame gf = new GraphFrame(verDF, edgeDF);
+		GraphFrame gf = GraphFrame.apply(verDF, edgeDF);
 		
 			gf.vertices().show();
 			
