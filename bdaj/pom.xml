@@ -14,9 +14,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <!--<graphframe.path>C:\deep_learning\bdaj\graphframe_lib\graphframes-0.5.0-spark2.1-s_2.11.jar</graphframe.path>-->
-        <!--<logging.sl4j.path>C:\deep_learning\bdaj\graphframe_lib\scala-logging-slf4j_2.11-2.1.2.jar</logging.sl4j.path>-->
-        <!--<logging.api>C:\deep_learning\bdaj\graphframe_lib\scala-logging-api_2.11-2.1.2.jar</logging.api>-->
         <scala.version>2.12.8</scala.version>
     </properties>
 
@@ -76,22 +73,6 @@
             <artifactId>gs-core</artifactId>
             <version>1.3</version>
         </dependency>
-
-<!--        <dependency>
-            <groupId>com.github.fommil.netlib</groupId>
-            <artifactId>core</artifactId>
-            <version>1.1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.scalanlp</groupId>
-            <artifactId>breeze_2.11</artifactId>
-            <version>0.13.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.scalanlp</groupId>
-            <artifactId>breeze-macros_2.11</artifactId>
-            <version>0.13.2</version>
-        </dependency>-->
 
         <!--Deep Learning-->
         <dependency>

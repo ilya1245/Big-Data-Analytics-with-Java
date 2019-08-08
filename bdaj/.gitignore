@@ -2,3 +2,5 @@
 /.idea
 /bdaj.iml
 /tmp
+*.iml
+*.patch
